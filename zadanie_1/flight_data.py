@@ -1,7 +1,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import requests
-from ZADANIE1.database import *
+from zadanie_1.database import *
 
 # Funkcja do pozyskania danych z OpenSky Network API
 def fetch_flight_data(databasefile="flights.db"):
