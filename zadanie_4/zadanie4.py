@@ -39,38 +39,32 @@ def pole(instance: Figura):
 @dispatch(Prostokat)
 def pole(instance: Prostokat):
     print("Pole: Prostokat")
-    print(instance.x * instance.y)
-    return 0
+    return instance.x * instance.y
 
 @dispatch(Prostokat, int, int)
 def pole(instance: Prostokat, x: int, y: int):
     print("Pole: Prostokat")
-    print(x * y)
-    return 0
+    return x * y
 
 @dispatch(Kwadrat)
 def pole(instance: Kwadrat):
     print("Pole: Kwadrat")
-    print(instance.x * instance.x)
-    return 0
+    return instance.x * instance.x
 
 @dispatch(Kwadrat, int)
 def pole(instance: Kwadrat, x: int):
     print("Pole: Kwadrat")
-    print(x * x)
-    return 0
+    return x * x
 
 @dispatch(Kolo)
 def pole(instance: Kolo):
     print("Pole: Kolo")
-    print(math.pi * instance.r * instance.r)
-    return 0
+    return math.pi * instance.r * instance.r
 
 @dispatch(Kolo, float)
 def pole(instance: Kolo, r: float):
     print("Pole: Kolo")
-    print(math.pi * r * r)
-    return 0
+    return math.pi * r * r
 
 # Polimorfizm w czasie wykonywania
 def polaPowierzchni(listaFigur):
