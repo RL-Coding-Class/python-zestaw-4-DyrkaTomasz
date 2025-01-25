@@ -3,27 +3,29 @@ import math
 
 class Figura(object):
     def __init__(self):
+        """ Konstruktor 1 """
         print("Figura init")
 
 class Prostokat(Figura):
     def __init__(self, x: int, y: int):
+        """ Konstruktor 2 """
         self.x = x
         self.y = y
-        # dokoncz definicje
 
 class Kwadrat(Prostokat):
     def __init__(self, x: int):
+        """ Konstruktor 3 """
         self.x = x
-        # dokoncz definicje
 
 class Kolo(Figura):
     def __init__(self, r: float):
+        """ Konstruktor 4 """
         self.r = r
-        # dokoncz definicje
 
 # Funkcje pole
 @dispatch(Figura)
 def pole(instance: Figura):
+    """ dispatch domyslny """
     print("Pole: Figura")
     return 0
 
@@ -38,36 +40,42 @@ def pole(instance: Figura):
 
 @dispatch(Prostokat)
 def pole(instance: Prostokat):
-    print("Pole: Prostokat")
+    """ dispatch Prostokat 1 """
+    print("Pole: " + str(type(instance)))
     return instance.x * instance.y
 
 @dispatch(Prostokat, int, int)
 def pole(instance: Prostokat, x: int, y: int):
-    print("Pole: Prostokat")
+    """ dispatch Prostokat 2 """
+    print("Pole: " + str(type(instance)))
     return x * y
 
 @dispatch(Kwadrat)
 def pole(instance: Kwadrat):
-    print("Pole: Kwadrat")
+    """ dispatch Kwadrat 1 """
+    print("Pole: " + str(type(instance)))
     return instance.x * instance.x
 
 @dispatch(Kwadrat, int)
 def pole(instance: Kwadrat, x: int):
-    print("Pole: Kwadrat")
+    """ dispatch Kwadrat 2 """
+    print("Pole: " + str(type(instance)))
     return x * x
 
 @dispatch(Kolo)
 def pole(instance: Kolo):
-    print("Pole: Kolo")
+    """ dispatch Kolo 1 """
+    print("Pole: " + str(type(instance)))
     return math.pi * instance.r * instance.r
 
 @dispatch(Kolo, float)
 def pole(instance: Kolo, r: float):
-    print("Pole: Kolo")
+    """ dispatch Kolo 2 """
     return math.pi * r * r
 
 # Polimorfizm w czasie wykonywania
 def polaPowierzchni(listaFigur):
+    """ zarzadzanie polami """
     for i in listaFigur:
         print(f"Pole obiektu: {pole(i)}")
 
