@@ -7,14 +7,18 @@ class Figura(object):
 
 class Prostokat(Figura):
     def __init__(self, x: int, y: int):
+        self.x = x
+        self.y = y
         # dokoncz definicje
 
 class Kwadrat(Prostokat):
     def __init__(self, x: int):
+        self.x = x
         # dokoncz definicje
 
 class Kolo(Figura):
     def __init__(self, r: float):
+        self.r = r
         # dokoncz definicje
 
 # Funkcje pole
@@ -32,9 +36,41 @@ def pole(instance: Figura):
 # - Kolo (z podaniem argumentów promienia jako float)
 # Uzywaj print() do weryfikacji wywolan
 
+@dispatch(Prostokat)
+def pole(instance: Prostokat):
+    print("Pole: Prostokat")
+    print(instance.x * instance.y)
+    return 0
 
+@dispatch(Prostokat, int, int)
+def pole(instance: Prostokat, x: int, y: int):
+    print("Pole: Prostokat")
+    print(x * y)
+    return 0
 
+@dispatch(Kwadrat)
+def pole(instance: Kwadrat):
+    print("Pole: Kwadrat")
+    print(instance.x * instance.x)
+    return 0
 
+@dispatch(Kwadrat, int)
+def pole(instance: Kwadrat, x: int):
+    print("Pole: Kwadrat")
+    print(x * x)
+    return 0
+
+@dispatch(Kolo)
+def pole(instance: Kolo):
+    print("Pole: Kolo")
+    print(math.pi * instance.r * instance.r)
+    return 0
+
+@dispatch(Kolo, float)
+def pole(instance: Kolo, r: float):
+    print("Pole: Kolo")
+    print(math.pi * r * r)
+    return 0
 
 # Polimorfizm w czasie wykonywania
 def polaPowierzchni(listaFigur):
