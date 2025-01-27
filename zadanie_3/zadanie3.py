@@ -6,11 +6,19 @@ def log_event(event):
     raise NotImplementedError(f"Brak implementacji dla typu: {type(event)}")
 
 # Napisz obsluge zdarzen str
+@log_event.register
+def _(event: str):
+    return True
 
 # Napisz obsluge zdarzen int
+@log_event.register
+def _(event: int):
+    return True
 
 # Napisz obsluge zdarzen typu dict
-
+@log_event.register
+def _(event: dict):
+    return True
 
 # Klasa z metodą używającą singledispatchmethod
 class EventHandler:
@@ -22,23 +30,45 @@ class EventHandler:
         """Domyślna obsługa zdarzeń"""
         raise NotImplementedError(f"Nieobsługiwany typ zdarzenia: {type(event)}")
 
-
-    # Napisz obsluge zdarzen str, pamietaj: self.event_count += 1
+    # Napisz obsluge zdarzen str
+    @handle_event.register
+    def _(self, event: str):
+        self.event_count += 1
+        return True
 
     # Napisz obsluge zdarzen int
+    @handle_event.register
+    def _(self, event: int):
+        self.event_count += 1
+        return True
 
-    # Napisz obsluge zdarzen list
+    # Napisz obsluge zdarzen typu dict
+    @handle_event.register
+    def _(self, event: dict):
+        self.event_count += 1
+        return True
+    
+    # Dla listy
+    @handle_event.register
+    def _(self, event: list):
+        self.event_count += 1
+        return True
 
 
 # Klasa pochodna z nowymi rejestracjami typów
 class DerivedHandler(EventHandler):
 
     # Napisz obsluge zdarzen int
+    @EventHandler.handle_event.register
+    def _(self, event: int):
+        self.event_count += 1
+        return True
 
     # Napisz obsluge zdarzen float
-
-
-
+    @EventHandler.handle_event.register
+    def _(self, event: float):
+        self.event_count += 1
+        return True
 
 
 # Demonstracja użycia

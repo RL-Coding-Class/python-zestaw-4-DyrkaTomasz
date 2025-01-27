@@ -3,23 +3,29 @@ import math
 
 class Figura(object):
     def __init__(self):
+        """ Konstruktor 1 """
         print("Figura init")
 
 class Prostokat(Figura):
     def __init__(self, x: int, y: int):
-        # dokoncz definicje
+        """ Konstruktor 2 """
+        self.x = x
+        self.y = y
 
 class Kwadrat(Prostokat):
     def __init__(self, x: int):
-        # dokoncz definicje
+        """ Konstruktor 3 """
+        self.x = x
 
 class Kolo(Figura):
     def __init__(self, r: float):
-        # dokoncz definicje
+        """ Konstruktor 4 """
+        self.r = r
 
 # Funkcje pole
 @dispatch(Figura)
 def pole(instance: Figura):
+    """ dispatch domyslny """
     print("Pole: Figura")
     return 0
 
@@ -32,12 +38,44 @@ def pole(instance: Figura):
 # - Kolo (z podaniem argumentów promienia jako float)
 # Uzywaj print() do weryfikacji wywolan
 
+@dispatch(Prostokat)
+def pole(instance: Prostokat):
+    """ dispatch Prostokat 1 """
+    print("Pole: " + str(type(instance)))
+    return instance.x * instance.y
 
+@dispatch(Prostokat, int, int)
+def pole(instance: Prostokat, x: int, y: int):
+    """ dispatch Prostokat 2 """
+    print("Pole: " + str(type(instance)))
+    return x * y
 
+@dispatch(Kwadrat)
+def pole(instance: Kwadrat):
+    """ dispatch Kwadrat 1 """
+    print("Pole: " + str(type(instance)))
+    return instance.x * instance.x
 
+@dispatch(Kwadrat, int)
+def pole(instance: Kwadrat, x: int):
+    """ dispatch Kwadrat 2 """
+    print("Pole: " + str(type(instance)))
+    return x * x
+
+@dispatch(Kolo)
+def pole(instance: Kolo):
+    """ dispatch Kolo 1 """
+    print("Pole: " + str(type(instance)))
+    return math.pi * instance.r * instance.r
+
+@dispatch(Kolo, float)
+def pole(instance: Kolo, r: float):
+    """ dispatch Kolo 2 """
+    return math.pi * r * r
 
 # Polimorfizm w czasie wykonywania
 def polaPowierzchni(listaFigur):
+    """ zarzadzanie polami """
     for i in listaFigur:
         print(f"Pole obiektu: {pole(i)}")
 
