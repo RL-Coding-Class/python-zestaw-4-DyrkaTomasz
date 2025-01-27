@@ -1,6 +1,4 @@
 pandas
-sqlite3
-time
 schedule
 matplotlib
 requests
